@@ -130,6 +130,7 @@ FTSensor::FTSensor()
     cmd_.sample_count           = 1;
     calibration_index           = ati::current_calibration;
     socketHandle_               = -1;
+    socketHTTPHandle_           = -1;
     resp_.cpf                   = 1000000;
     resp_.cpt                   = 1000000;
     rdt_rate_                   = 0;
@@ -241,6 +242,7 @@ bool FTSensor::init(std::string ip, int calibration_index, uint16_t cmd, int sam
 
   return initialized_;
 }
+
 bool FTSensor::openSockets()
 {
   try{
@@ -256,10 +258,11 @@ bool FTSensor::openSockets()
   return true;
 }
 void FTSensor::openSocket(int& handle,const std::string ip,const uint16_t port,const int option)
-{
-  // create the socket
+{   
     if (handle != -1)
         rt_dev_close(handle);
+
+
     std::string proto = "";
     if(option == IPPROTO_UDP)
     {
