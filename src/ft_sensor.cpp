@@ -325,6 +325,7 @@ bool FTSensor::getCalibrationData()
       std::cerr << message_header() << "Using default counts per force : " << resp_.cpf << std::endl;
       std::cerr << message_header() << "Using default counts per torque : " << resp_.cpt << std::endl;
   }
+  return true;
 }
 
 FTSensor::settings_error_t FTSensor::getSettings()
